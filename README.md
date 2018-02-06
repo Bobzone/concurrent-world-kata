@@ -151,3 +151,32 @@
         }
     }
 ```
+
+## Condition
+
+```
+    /**
+     * Fair threads generate fair conditions.
+     */
+    ReentrantLock lock = new ReentrantLock();
+    Condition condition = lock.newCondition();
+
+    public void methodBody() {
+        /**
+         * Regular await.
+         */
+        condition.await();
+
+        /**
+         * Three awaits with timeout that can be expressed with time units.
+         */
+        condition.await(1, TimeUnit.SECONDS);
+        condition.awaitNanos(1000);
+        condition.awaitUntil(new Date());
+
+        /**
+         * Prevents the interruption of thread.
+         */
+        condition.awaitUninterruptibly();
+    }
+```
