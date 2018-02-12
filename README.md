@@ -180,3 +180,26 @@
         condition.awaitUninterruptibly();
     }
 ```
+
+## ReadWriteLock
+
+```
+    /**
+     * Exclusive writes and exclusive reads. ReadWriteLock is an interface with two methods. readlock() and writeLock()
+     * Read operations are free, write operations are exlusive of other writes and reads.
+     * Allows superior throughput, when many reads and fewer writes.
+     */
+    
+        ReadWriteLock lock = new ReentrantReadWriteLock();
+        final Lock readLock = lock.readLock();
+        final Lock writeLock = lock.writeLock();
+
+        Map<Long, User> cache = new HashMap<>();
+
+        try {
+            writeLock.lock();
+            cache.put(key, value);
+        } finally {
+            writeLock.unlock();
+        }
+```
